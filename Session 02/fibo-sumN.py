@@ -16,4 +16,4 @@ def fibonacci(number):
             sum += num1
         return sum
 print('Sum of the first 5 terms of the Fibonacci series: ', fibonacci(5))
-print('Sum of the first 5 terms of the Fibonacci series: ', fibonacci(10))
+print('Sum of the first 10 terms of the Fibonacci series: ', fibonacci(10))

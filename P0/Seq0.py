@@ -20,5 +20,22 @@ def seq_count_base(sequence, base):
 
 
 def seq_count(sequence):
-    d = {'A': seq_count_base(sequence, 'A'), 'C': seq_count_base(sequence, 'C'), 'T': seq_count_base(sequence, 'T'), 'G': seq_count_base(sequence, 'G')}
+    d = {'A': seq_count_base(sequence, 'A'), 'C': seq_count_base(sequence, 'C'),
+         'T': seq_count_base(sequence, 'T'), 'G': seq_count_base(sequence, 'G')}
     return d
+
+
+def seq_reverse(sequence):
+    return sequence[::-1]
+
+
+def seq_complement(sequence):
+    bases = ['A', 'C', 'T', 'G']
+    complement_bases = ['T', 'G', 'A', 'C']
+    d = dict(zip(bases, complement_bases))
+    complement_seq = ''
+    for bases in sequence:
+        for base, complement in d.items():
+            if bases == base:
+                complement_seq += complement
+    return complement_seq

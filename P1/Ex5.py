@@ -3,7 +3,7 @@ from P1.Seq1 import Seq
 print("-----| Practice 1, Exercise 5 |------")
 seq0 = Seq()
 seq1 = Seq("ACTGA")
-seq2 = Seq("AFCTGS")
+seq2 = Seq("Invalid sequence")
 
 bases = ["A", "C", "G", "T"]
 

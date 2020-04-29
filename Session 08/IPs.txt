@@ -1,0 +1,5 @@
+ Machine     | Interface  |   Date    |      Place       |       IP      |
+ -------------------------------------------------------------------------
+ Mobile      |    Wifi    |29/04/2020 |  Alcorcón(Home)  | 192.168.1.42  |
+ Laptop      |    Wifi    |29/04/2020 |  Alcorcón(Home)  | 192.168.1.48  |
+ Lab Computer|    Wire    |25/02/2020 |  Alcorcón (Uni)  | 255.255.224.0 |

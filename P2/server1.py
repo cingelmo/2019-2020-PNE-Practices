@@ -18,7 +18,7 @@ try:
         number_con += 1
         print("CONNECTION: {}. From the IP: {}".format(number_con, address))
         msg = clientsocket.recv(2048)
-        print("Message from client: ", end="")
+        print("Message from client: ", end="",)
         termcolor.cprint(msg.decode("utf-8"), "green")
         message = "Message received from the Server"
         send_bytes = str.encode(message)

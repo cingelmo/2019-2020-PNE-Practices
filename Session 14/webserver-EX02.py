@@ -40,7 +40,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(status)  # -- Status line: OK!
 
         # Define the content-type header:
-        self.send_header('Content-Type', 'text/plain')
+        self.send_header('Content-Type', 'text/html')
         self.send_header('Content-Length', len(contents.encode()))
 
         # The header is finished

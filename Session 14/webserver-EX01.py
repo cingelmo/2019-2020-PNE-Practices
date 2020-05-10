@@ -36,7 +36,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(status)  # -- Status line: OK!
 
         # Define the content-type header:
-        self.send_header('Content-Type', 'text/plain')
+        self.send_header('Content-Type', 'text/html')
         self.send_header('Content-Length', len(contents.encode()))
 
         # The header is finished
@@ -55,7 +55,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 Handler = TestHandler
 
 # -- Open the socket server
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
+with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
 
     print("Serving at PORT", PORT)
 

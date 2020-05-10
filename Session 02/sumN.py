@@ -1,5 +1,5 @@
-#-- 1 + 2 + 3 + ... + 20
-#-- 1 + ... + 100
+# -- 1 + 2 + 3 + ... + 20
+# -- 1 + ... + 100
 
 
 def sumn(n):
@@ -9,5 +9,5 @@ def sumn(n):
     return res
 
 
-print('sum of 1-20: ',sumn(20))
+print('sum of 1-20: ', sumn(20))
 print('sum of 1-100: ', sumn(100))

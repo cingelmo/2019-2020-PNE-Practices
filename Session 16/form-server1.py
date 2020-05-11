@@ -6,12 +6,13 @@ from pathlib import Path
 # Define the Server's port
 PORT = 8080
 
+
 # -- This is for preventing the error: "Port already in use"
 socketserver.TCPServer.allow_reuse_address = True
 
 
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
-# It means that our class inherits all his methods and properties
+# It means that our class inheritates all his methods and properties
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -20,33 +21,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
-        request = self.requestline.split(' ')
-        raw_arg = request[1]
-        clean_arg = raw_arg.split('?')
-        argument = clean_arg[0]
 
-        if argument == '/':
-            contents = Path('form-EX02.html').read_text()
-
-        elif argument == '/echo':
-            argument1 = clean_arg[1]
-            # -- Given the fact that in my url it appeared: http://localhost:8080/echo?msg=vita&%27chk=on
-            # -- I had to add the %27
-            arguments = argument1.split('&%27')
-            value = arguments[0].split('=')[1]
-            contents = Path('form-EX01.html').read_text()
-
-            if len(arguments) > 1:
-                chk, chk_value = arguments[1].split("=")
-                print(chk, chk_value)
-                if chk == "chk":
-                    value = value.upper()
-
-            print_value = f"<p>{value}</p>"
-            contents += print_value
-
-        else:
-            contents = Path('Error.html').read_text()
+        # Open the form1.html file
+        # Read the index from the file
+        contents = Path('form-1.html').read_text()
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!

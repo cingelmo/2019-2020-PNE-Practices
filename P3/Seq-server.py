@@ -1,46 +1,90 @@
 import socket
 import termcolor
-'''from P1.Seq1 import Seq'''
+from P1.Seq1 import Seq
 
 IP = "127.0.0.1"
 PORT = 8080
 
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-ls.bind((IP, PORT))
-
 ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+ls.bind((IP, PORT))
 
 ls.listen()
 
-print("SEQ server configured!")
+
+print("Server configured!")
+
+sequences = ["ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA",
+             "AAAAACATTAATCTGTGGCCTTTCTTTGCCATTTCCAACTCTGCCACCTCCATCGAACGA",
+             "CAAGGTCCCCTTCTTCCTTTCCATTCCCGTCAGCTTCATTTCCCTAATCTCCGTACAAAT",
+             "CCCTAGCCTGACTCCCTTTCCTTTCCATCCTCACCAGACGCCCGCATGCCGGACCTCAAA",
+             "AGCGCAAACGCTAAAAACCGGTTGAGTTGACGCACGGAGAGAAGGGGTGTGTGGGTGGGT"]
+bases = ["A", "C", "T", "G"]
+folder = "../Session-04/"
 
 while True:
+    print('Waiting for clients...')
     try:
-        print('Waiting for clients...')
         (cs, client_ip_port) = ls.accept()
 
     except KeyboardInterrupt:
-        print('Server is done')
+        print('Server stopped')
         ls.close()
         exit()
 
     else:
-        # ---Step 5: Receiving information
         msg_raw = cs.recv(2000)
         msg = msg_raw.decode()
         all_lines = msg.split('\n')
-        line0 = all_lines[0].strip()
-        cmd = line0.split(' ')[0]
+        first_line = all_lines[0].strip()
+        commands = first_line.split(' ')
 
-        if cmd == 'PING':
+        if len(commands) >= 2:
+            cmd1 = commands[0]
+            cmd2 = commands[1]
+        else:
+            cmd1 = msg
+            cmd2 = ''
+
+        response = ''
+        if cmd1 == 'PING':
             termcolor.cprint('PING command!', 'green')
             response = 'OK!'
 
-        else:
-            print(f'From server: ', end='')
-            # --Step 6: Send a response message to the client
-            response = 'ECHO: ' + msg + '\n'
+        elif cmd1 == "GET":
+            for element in range(len(sequences)):
+                if element == int(cmd2):
+                    termcolor.cprint("GET", 'green')
+                    response = sequences[element]
 
-            cs.send(response.encode())
-            cs.close()
+        elif cmd1 == "INFO":
+            seq0 = Seq(cmd2)
+            response = ""
+            termcolor.cprint("INFO", 'green')
+            print('Sequence: ', cmd2)
+            print("Total length: ", seq0.len())
+            for element in bases:
+                response = round(seq0.count_base(element) * (100 / seq0.len()), 2)
+                print(element, ":", seq0.count_base(element), "(", response, "% )", "\n")
+
+        elif cmd1 == "COMP":
+            seq0 = Seq(cmd2)
+            termcolor.cprint("COMP", 'green')
+            response = seq0.complement()
+
+        elif cmd1 == "REV":
+            seq0 = Seq(cmd2)
+            termcolor.cprint("REV", 'green')
+            response = seq0.reverse()
+
+        elif cmd1 == "GENE":
+            seq0 = Seq("")
+            seq0 = seq0.read_fasta(folder + cmd2)
+            termcolor.cprint("GENE", 'green')
+            response = seq0.reverse()
+
+        print(response)
+        cs.send(response.encode())
+        cs.close()

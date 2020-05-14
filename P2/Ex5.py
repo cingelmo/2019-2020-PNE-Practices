@@ -5,7 +5,7 @@ PRACTICE = 2
 EXERCISE = 5
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
-FOLDER = "../Session 04/"
+FOLDER = "../Session-04/"
 Filename = "U5"
 TypeDoc = '.txt'
 

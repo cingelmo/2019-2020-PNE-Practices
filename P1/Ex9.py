@@ -1,7 +1,7 @@
 from P1.Seq1 import Seq
 
 print("-----| Practice 1, Exercise 9 |------")
-FOLDER = "../Session 04/"
+FOLDER = "../Session-04/"
 TypeDoc = '.txt'
 
 seq = Seq(FOLDER + 'U5' + TypeDoc)

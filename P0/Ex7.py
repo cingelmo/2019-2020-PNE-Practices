@@ -1,6 +1,6 @@
 from P0.Seq0 import*
 
-FOLDER = "../Session 04/"
+FOLDER = "../Session-04/"
 File = ['U5']
 TypeDOC = '.txt'
 

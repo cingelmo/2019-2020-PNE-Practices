@@ -1,6 +1,6 @@
 from P1.Seq1 import Seq
 
-FOLDER = "../Session 04/"
+FOLDER = "../Session-04/"
 Filename = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 TypeDOC = '.txt'
 bases = ['A', 'C', 'G', 'T']

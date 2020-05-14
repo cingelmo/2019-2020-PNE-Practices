@@ -1,6 +1,6 @@
 from P0.Seq0 import*
 
-FOLDER = "../Session 04/"
+FOLDER = "../Session-04/"
 Filename = ["ADA", "FRAT1", "FXN", "RNU6_269P", "U5"]
 TypeDOC = '.txt'
 bases = ['A', 'C', 'G', 'T']

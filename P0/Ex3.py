@@ -1,7 +1,7 @@
 from P0.Seq0 import *
 
 filename = ["U5", 'ADA', 'FRAT1', 'FXN']
-FOLDER = "../Session 04/"
+FOLDER = "../Session-04/"
 TypeDOC = '.txt'
 
 print('----| Exercise 3| ----')

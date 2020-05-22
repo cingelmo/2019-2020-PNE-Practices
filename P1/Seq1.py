@@ -65,3 +65,9 @@ class Seq:
         file_contents = Path(filename).read_text().split('\n')[1:]
         self.strbases = "".join(file_contents)
         return self
+
+    def percent(self, base):
+        return round(self.count_base(base) * 100 / self.len(), 1)
+
+
+# -- The percent function has been created for the final project, it will be used then.

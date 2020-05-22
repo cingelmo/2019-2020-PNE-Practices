@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FINAL PROJECT</title>
+  </head>
+  <body style="background-color: turquoise;">
+  <font face="Trebuchet MS,arial">
+    <h1 align="center"> Get a response for any of the following requests: </h1>
+  </font>
+    <p> ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</p>
+    <form action='/listSpecies' method="get">
+        <font face="Trebuchet MS"><b>LIST OF THE AVAILABLE SPECIES IN THE DATA BASE</b></font><br><br>
+        <font face="Trebuchet MS">Insert a limit:</font>
+        <input type = 'text' name="limit"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT">
+    </form>
+
+    <p>____________________________________________________________________________________</p>
+    <form action='/karyotype' method="get">
+        <font face="Trebuchet MS"><b>KARYOTYPE INFORMATION OF A GIVEN SPECIE</b></font><br><br>
+        <font face="Trebuchet MS"> Insert the name of the desired specie:</font>
+        <input type = 'text' size="19" name="specie"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT">
+     </form>
+
+    <p>____________________________________________________________________________________</p>
+    <form action='/chromosomeLength' method="get">
+        <font face="Trebuchet MS"><b>CHROMOSOME LENGTH OF A GIVEN SPECIE</b></font><br><br>
+        <font face="Trebuchet MS">Insert the name of the desired specie:</font>
+        <input type = 'text' size="19" name="specie"><br>
+        <font face="Trebuchet MS">Introduce the desired chromosome:</font>
+        <input type = 'text' size="19" name="chromo"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT"><br>
+     </form>
+    <p>____________________________________________________________________________________</p>
+    <form action='/geneSeq' method="get">
+        <font face="Trebuchet MS"><b>SEQUENCE OF A GIVEN HUMAN GENE</b></font><br><br>
+        <font face="Trebuchet MS">Insert the desired gene: </font>
+        <input type = 'text' size="19" name="gene"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT">
+    </form>
+
+    <p>____________________________________________________________________________________</p>
+    <form action='/geneInfo' method="get">
+        <font face="Trebuchet MS"><b>DIFFERENT KINDS OF INFORMATION ABOUT A GIVEN GENE</b></font><br><br>
+        <font face="Trebuchet MS">Insert the desired gene: </font>
+        <input type = 'text' size="19" name="gene"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT">
+     </form>
+
+    <p>____________________________________________________________________________________</p>
+    <form action='/geneCal' method="get">
+        <font face="Trebuchet MS"><b>TOTAL LENGTH AND THE PERCENTAGE OF ALL BASES OF A GENE</b></font><br><br>
+        <font face="Trebuchet MS">Insert the desired gene: </font>
+        <input type = 'text' size="19" name="gene"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT">
+     </form>
+    <p>____________________________________________________________________________________</p>
+    <form action='/geneList' method="get">
+        <font face="Trebuchet MS"><b>NAMES OF THE GENES IN A GIVEN CHROMOSOME FROM A START TO AN END POINT</b></font><br><br>
+        <font face="Trebuchet MS">Insert the desired chromosome:</font>
+        <input type = 'text' size="19" name="chromo"><br>
+        <font face="Trebuchet MS">Insert the point of start:</font>
+        <input type = 'text' size="19" name="start"><br>
+        <font face="Trebuchet MS">Insert the point of end:</font>
+        <input type = 'text' size="19" name="end"><br><br>
+        <input type = 'checkbox' name="json" value="1">
+        <font face="Trebuchet MS">Check for a JSON format</font><br><br>
+        <input type = 'submit' value="SUBMIT">
+     </form>
+  </body>
+</html>

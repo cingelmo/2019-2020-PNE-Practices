@@ -16,13 +16,13 @@ ls.listen()
 
 print("Server configured!")
 
-sequences = ["ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA",
-             "AAAAACATTAATCTGTGGCCTTTCTTTGCCATTTCCAACTCTGCCACCTCCATCGAACGA",
-             "CAAGGTCCCCTTCTTCCTTTCCATTCCCGTCAGCTTCATTTCCCTAATCTCCGTACAAAT",
-             "CCCTAGCCTGACTCCCTTTCCTTTCCATCCTCACCAGACGCCCGCATGCCGGACCTCAAA",
-             "AGCGCAAACGCTAAAAACCGGTTGAGTTGACGCACGGAGAGAAGGGGTGTGTGGGTGGGT"]
+sequences = ["TCTTCCATCCCACCTCGCAGTGCCGTACCTGATTTGTGATTCCGAGGGC",
+             "CAACAAACACCATCCCTCGTCCGTCCTCTTCCAAGACTAGTCCCATCCA",
+             "GGCCTCCGGACCAGTAAATTAACCTCCCCCCCTCACGGCCGTGATTCCC",
+             "AGCGCAACTGCATCACCATTTCCGACTCCTCACCACATTCCTATTTTGA"]
 bases = ["A", "C", "T", "G"]
 folder = "../Session-04/"
+genes = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 
 while True:
     print('Waiting for clients...')
@@ -63,11 +63,11 @@ while True:
             seq0 = Seq(cmd2)
             response = ""
             termcolor.cprint("INFO", 'green')
-            print('Sequence: ', cmd2)
-            print("Total length: ", seq0.len())
+            response += f'Sequence: {cmd2}'
+            response += f"Total length: {seq0.len()}"
             for element in bases:
-                response = round(seq0.count_base(element) * (100 / seq0.len()), 2)
-                print(element, ":", seq0.count_base(element), "(", response, "% )", "\n")
+                resp = round(seq0.count_base(element) * (100 / seq0.len()), 2)
+                response += f'{element}: {seq0.count_base(element)} ( {resp}% ) \n'
 
         elif cmd1 == "COMP":
             seq0 = Seq(cmd2)
@@ -81,7 +81,7 @@ while True:
 
         elif cmd1 == "GENE":
             seq0 = Seq("")
-            seq0 = seq0.read_fasta(folder + cmd2)
+            seq0 = seq0.read_fasta(folder + cmd2 + '.txt')
             termcolor.cprint("GENE", 'green')
             response = seq0.reverse()
 

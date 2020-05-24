@@ -9,6 +9,8 @@ PORT = 8080
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
+    # -- This function will extract the information we are looking for within our URL,
+    # which in this case will be the function that the user asks for:
     def extract_parameters(self, path):
         imp_params = dict()
         if '?' in path:
@@ -31,12 +33,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         termcolor.cprint(self.requestline, 'green')
 
         server = 'rest.ensembl.org'
-
+        # -- If nothing is written after connecting the port, the page will display completely:
         if self.path == '/':
             filename = 'index.html'
             with open(filename, 'r') as f:
                 contents = f.read()
-
+        # -- If the user asks for any of the following functions ('elifs'), different information will be given:
         elif '/listSpecies' in self.path:
             # -- Make the request:
             parameters = self.extract_parameters(self.path)
@@ -89,7 +91,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             # -- This error raises if the input is not a number
             except ValueError:
                 response_status = 404
-                filename = open('Error.html', 'r')
+                filename = open('error.html', 'r')
                 contents = filename.read()
 
         elif '/karyotype' in self.path:
@@ -137,12 +139,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 # -- This exception raises when the specie doesn't belong in the chromosome_data, so it doesn't exist:
                 except KeyError:
                     response_status = 404
-                    filename = open('Error.html', 'r')
+                    filename = open('error.html', 'r')
                     contents = filename.read()
             # -- This error raises if the input is left in blank:
             else:
                 response_status = 404
-                filename = open('Error.html', 'r')
+                filename = open('error.html', 'r')
                 contents = filename.read()
 
         elif '/chromosomeLength' in self.path:
@@ -202,17 +204,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 # -- This error raises if the input is not a number:
                 except ValueError:
                     response_status = 404
-                    filename = open('Error.html', 'r')
+                    filename = open('error.html', 'r')
                     contents = filename.read()
                 # -- This exception raises when the specie doesn't belong in the chromosome_specie, so it doesn't exist:
                 except KeyError:
                     response_status = 404
-                    filename = open('Error.html', 'r')
+                    filename = open('error.html', 'r')
                     contents = filename.read()
             # -- This error raises if the input is left in blank:
             else:
                 response_status = 404
-                filename = open('Error.html', 'r')
+                filename = open('error.html', 'r')
                 contents = filename.read()
 
         elif '/geneSeq' in self.path:
@@ -246,10 +248,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     # -- Now if 'json' is in the request, the contents will be given in this format:
                     if 'json' in parameters:
                         json_option = True
-                        # -- A dictionary with the sequence is created:
+                        # -- A dictionary with the sequence is created, so it can display the info in that format:
                         seq_dictionary = dict()
                         seq_dictionary['seq'] = sequence
                         contents = json.dumps(seq_dictionary)
+
+                    # -- If 'json' is not in the request, the contents will be an html file
                     else:
                         contents = f"""
                                    <html>
@@ -303,16 +307,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     end = answer[0]['end']
                     length = end - start
                     chromosome = answer[0]['assembly_name']
-
+                    # -- If 'json' is in the request, the contents will be given in this format:
                     if 'json' in parameters:
                         json_option = True
+                        # -- We create a dictionary to store all the values for each type of info:
                         info_dictionary = dict()
                         info_dictionary['start'] = start
                         info_dictionary['end'] = end
                         info_dictionary['length'] = length
                         info_dictionary['chromosome'] = chromosome
                         contents = json.dumps(info_dictionary)
-
+                    # -- If 'json' is not in the request, the contents will be an html file:
                     else:
                         contents = f"""
                                    <html>
@@ -332,15 +337,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                    """
                 except KeyError:
                     response_status = 404
-                    filename = open('Error.html', 'r')
+                    filename = open('error.html', 'r')
                     contents = filename.read()
             # -- This error raises if the input is left in blank
             else:
                 response_status = 404
-                filename = open('Error.html', 'r')
+                filename = open('error.html', 'r')
                 contents = filename.read()
 
-        elif '/geneCal' in self.path:
+        elif '/geneCalc' in self.path:
             parameters = self.extract_parameters(self.path)
 
             if 'gene' in parameters and parameters['gene'] != '':
@@ -371,7 +376,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     percentageC = seq.percent('C')
                     percentageT = seq.percent('T')
                     percentageG = seq.percent('G')
-
+                    # -- If 'json' is in the request, the contents will be given in this format:
                     if 'json' in parameters:
                         json_option = True
                         calc_dictionary = dict()
@@ -405,18 +410,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                    """
                 except KeyError:
                     response_status = 404
-                    filename = open('Error.html', 'r')
+                    filename = open('error.html', 'r')
                     contents = filename.read()
             # -- This error raises if the input is left in blank
             else:
                 response_status = 404
-                filename = open('Error.html', 'r')
+                filename = open('error.html', 'r')
                 contents = filename.read()
 
         elif '/geneList' in self.path:
             parameters = self.extract_parameters(self.path)
-            if 'start' in parameters and parameters['start'] != '' and 'chromo' in parameters and parameters[
-                'chromo'] != '' and 'end' in parameters and parameters['end'] != '':
+            if 'start' in parameters and parameters['start'] != '' and 'chromo' in parameters and parameters['chromo'] != '' and 'end' in parameters and parameters['end'] != '':
                 chromosome = parameters['chromo']
                 start = parameters['start']
                 end = parameters['end']
@@ -431,9 +435,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     # -- Process data:
                     text_json = r1.read().decode("utf-8")
                     answer = json.loads(text_json)
+                    # -- If 'json' is in the request, the contents will be given in this format:
                     if 'json' in parameters:
                         json_option = True
                         json_list = []
+                        # -- Here, it iterates through the info received from ensembl until it reaches the
+                        # 'feature_type' key, the information there will be stored and given in a json format
                         for element in answer:
                             if element['feature_type'] == 'gene':
                                 gene_dictionary = dict()
@@ -462,18 +469,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                                 </body>
                                                 </html>
                                                 """
+                # -- This error raises if the input is not a number
                 except ValueError:
                     response_status = 404
-                    filename = open('Error.html', 'r')
+                    filename = open('error.html', 'r')
                     contents = filename.read()
             # -- This error raises if the input is left in blank
             else:
                 response_status = 404
-                filename = open('Error.html', 'r')
+                filename = open('error.html', 'r')
                 contents = filename.read()
+        # -- This error raises if the URL doesn't include an existent function:
         else:
             response_status = 404
-            filename = 'Error.html'
+            filename = 'error.html'
             with open(filename, 'r') as f:
                 contents = f.read()
 

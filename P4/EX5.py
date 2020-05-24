@@ -18,7 +18,7 @@ def resource(path):
     elif path == "/info/T":
         file = Path("T.html").read_text()
     else:
-        file = Path("Error.html").read_text()
+        file = Path("error.html").read_text()
 
     return file
 

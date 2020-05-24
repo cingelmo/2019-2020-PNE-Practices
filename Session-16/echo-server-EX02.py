@@ -46,7 +46,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents += print_value
 
         else:
-            contents = Path('Error.html').read_text()
+            contents = Path('error.html').read_text()
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!

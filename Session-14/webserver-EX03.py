@@ -32,7 +32,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = Path(path).read_text()
             status = 200
         except FileNotFoundError:
-            contents = Path('Error.html').read_text()
+            contents = Path('error.html').read_text()
             status = 404
         # Generating the response message
         self.send_response(status)  # -- Status line: OK!

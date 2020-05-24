@@ -34,7 +34,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             status = 200
         else:
             termcolor.cprint('ERROR: Not Found', 'red')
-            contents = Path('Error.html').read_text()
+            contents = Path('error.html').read_text()
             status = 404
         # Generating the response message
         self.send_response(status)  # -- Status line: OK!

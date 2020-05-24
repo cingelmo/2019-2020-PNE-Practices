@@ -237,7 +237,7 @@ print(data1)
 print("")
 print("---> NON EXISTENT endpoint")
 
-print("**** TEST 1: *****")
+print("***** TEST 1: *****")
 print("")
 conn.request("GET", "/coronavirus")
 r1 = conn.getresponse()

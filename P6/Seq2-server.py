@@ -144,7 +144,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     </html>"""
 
         else:
-            contents = Path('Error.html').read_text()
+            contents = Path('error.html').read_text()
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
